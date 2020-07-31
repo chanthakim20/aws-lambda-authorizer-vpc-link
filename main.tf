@@ -55,3 +55,19 @@ resource "aws_api_gateway_deployment" "MyDemoDeployment" {
     create_before_destroy = true
   }
 }
+
+resource "aws_lb" "my-nlb" {
+  name               = "example"
+  internal           = true
+  load_balancer_type = "network"
+  enable_deletion_protection = false
+  tags = {
+    Environment = "production"
+  }
+}
+
+resource "aws_api_gateway_vpc_link" "example" {
+  name        = "example"
+  description = "example description"
+  target_arns = [aws_lb.my-nlb.arn]
+}
