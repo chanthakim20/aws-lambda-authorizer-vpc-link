@@ -65,11 +65,12 @@ data "aws_subnet" "subnets" {
   id       = each.value
 }
 resource "aws_lb" "my-nlb" {
+  for_each = data.aws_subnet_ids.my-vpc-id.ids
   name               = "example"
   internal           = true
   load_balancer_type = "network"
   enable_deletion_protection = false
-  subnets = [data.aws_subnet.subnets[0].id]
+  subnets = [data.aws_subnet.subnets.id]
   tags = {
     Environment = "production"
   }
