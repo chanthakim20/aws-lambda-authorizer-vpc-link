@@ -1,6 +1,6 @@
 provider "aws" {
-  alias = "us-east-1"
-  region = "us-east-1"
+  profile = "default"
+  region  = var.region
 }
 
 resource "aws_api_gateway_rest_api" "MyDemoAPI" {
