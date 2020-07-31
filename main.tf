@@ -3,7 +3,9 @@ provider "aws" {
   region  = var.region
 }
 
-variable "subnet_id" {}
+variable "subnet_id" {
+  default = "subnet-0448810bddf239aab"
+}
 
 
 resource "aws_api_gateway_rest_api" "MyDemoAPI" {
@@ -68,7 +70,6 @@ data "aws_subnet" "subnets" {
   id       = each.value
 }
 resource "aws_lb" "my-nlb" {
-
   name               = "example"
   internal           = true
   load_balancer_type = "network"
