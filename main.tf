@@ -56,11 +56,20 @@ resource "aws_api_gateway_deployment" "MyDemoDeployment" {
   }
 }
 
+data "aws_subnet_ids" "my-vpc-id" {
+  vpc_id = var.vpc_id
+}
+
+data "aws_subnet" "subnets" {
+  for_each = data.aws_subnet_ids.my-vpc-id.ids
+  id       = each.value
+}
 resource "aws_lb" "my-nlb" {
   name               = "example"
   internal           = true
   load_balancer_type = "network"
   enable_deletion_protection = false
+  subnets = [data.aws_subnet.subnets.id ]
   tags = {
     Environment = "production"
   }
