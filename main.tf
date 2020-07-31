@@ -69,7 +69,7 @@ resource "aws_lb" "my-nlb" {
   internal           = true
   load_balancer_type = "network"
   enable_deletion_protection = false
-  subnets = [data.aws_subnet.subnets.id ]
+  subnets = [data.aws_subnet.subnets[0].id]
   tags = {
     Environment = "production"
   }

@@ -4,5 +4,3 @@ variable "region" {
 variable "vpc_id" {
   default = "vpc-02c09c2cfd9bdf910"
 }
-
-
