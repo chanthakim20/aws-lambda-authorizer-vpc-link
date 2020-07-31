@@ -26,6 +26,7 @@ resource "aws_api_gateway_method" "MyDemoMethod" {
   authorization = "NONE"
 }
 
+
 resource "aws_api_gateway_integration" "MyDemoIntegration" {
   rest_api_id          = aws_api_gateway_rest_api.MyDemoAPI.id
   resource_id          = aws_api_gateway_resource.MyDemoResource.id
@@ -80,7 +81,7 @@ resource "aws_lb" "my-nlb" {
   }
 }
 
-resource "aws_api_gateway_vpc_link" "example" {
+resource "aws_api_gateway_vpc_link" "vpc-link" {
   name        = "example"
   description = "example description"
   target_arns = [aws_lb.my-nlb.arn]
